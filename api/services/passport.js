@@ -38,12 +38,13 @@ passport.use(new WechatStrategy({
      name:"wechat",
      appSecret: "8b35181b21c24a746c8ad31b65a5cc53",
      client:"web",
-     callbackURL: "http://localhost:1337/user/wechat/callback",
+     callbackURL: "http://websub.flashpayment.com/user/wechat/callback",
      scope: "snsapi_login",
     enableProof: false
   }, function (accessToken, refreshToken, profile, expires_in,done) {
     console.log("***********************");
     console.log(profile);
+    console.log("accessToken      "+accessToken);
     console.log("outside profile openid ; "+ profile.openid);
     console.log(typeof profile.openid);
     findByWechatId(profile.openid, function (err, user) {
@@ -54,8 +55,8 @@ passport.use(new WechatStrategy({
          console.log("create user");
         User.create({
           username:profile.nickname,
-          wechatId: profile.openid
-
+          wechatId: profile.openid,
+          uid:profile.unionid
           // You can also add any other data you are getting back from Facebook here 
           // as long as it is in your model
 
