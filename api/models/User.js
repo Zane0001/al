@@ -16,6 +16,11 @@ attributes: {
       type: 'string',
       required: true,
       unique: true
+    },
+    uid:{
+      type:'string',
+      required:true,
+      unique:true
     }
     
   }
